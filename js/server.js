@@ -7,16 +7,15 @@ const server = net.createServer ((socket) => {
   //'connection' listener
   console.log('client connected');
   socket.on('data', (data) => {
-    console.log(data.toString());
+    console.log('[ADMIN]: ' + data.toString());
   });
 
   socket.on('end', () => {
     console.log('client disconnected');
   });
 
-  socket.write('data\r\n');
+  socket.write('hello\r\n');
   socket.pipe(socket);
-
 });
 
 server.on('error', (err) => {
