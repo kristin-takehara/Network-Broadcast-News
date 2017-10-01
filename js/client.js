@@ -4,8 +4,7 @@ console.log('hello world');
 const PORT = process.env.PORT || 6969;
 const address = '0.0.0.0';
 
-
-///////////////JON'S CODE/////////
+///////////////JON'S CODE////////////
 const net = require('net');
 const server = new net.Socket();
 server.connect(PORT, () => {
@@ -16,12 +15,10 @@ server.connect(PORT, () => {
   server.pipe(process.stdout);
 });
 
-client.on('end', () => {
+server.on('end', () => {
   console.log('disconnected from server');
 });
 
-
-/////////////KRISSY'S CODE//////////
 // const net =require('net');
 // const client = net.createConnection({ port: 6969}, () => {
 //   //'connect' listener
@@ -39,3 +36,4 @@ client.on('end', () => {
 // client.on('end', () => {
 //   console.log('disconnected from server');
 // });
+

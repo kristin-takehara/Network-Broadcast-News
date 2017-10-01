@@ -35,18 +35,16 @@ const server = net.createServer ((client) => {
       //broadcase the message to all other clients
       broadcast(client, `[${client.username}]: ` + data.toString()); //pass in the 'client' sending the message and print
       }
+     });
+  client.on('end', () => {
+  console.log('client disconnected');
   });
-    client.on('end', () => {
-    console.log('client disconnected');
-  });
-
 });
 
-
-server.on('error', (err) => {
-  throw err;
-});
  //'connection' listeners
 server.listen(PORT, address, () => {
   console.log('SERVER BCAST FROM ' + address + ':' + PORT);
+});
+server.on('error', (err) => {
+  throw err;
 });
