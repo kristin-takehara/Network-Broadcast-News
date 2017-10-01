@@ -1,22 +1,41 @@
 //jshint esversion: 6
 console.log('hello world');
 
-const port = 6969;
+const PORT = process.env.PORT || 6969;
 const address = '0.0.0.0';
 
-const net =require('net');
-const client = net.createConnection({ port: 6969}, () => {
-  //'connect' listener
+
+///////////////JON'S CODE/////////
+const net = require('net');
+const server = new net.Socket();
+server.connect(PORT, () => {
   console.log('connected to server');
 
-  process.stdin.on('readable', () => {
-    const chunk = process.stdin.read();
-  if(chunk !== null) {
-    client.write(chunk.toString());
-    }
-  });
+  process.stdin.pipe(server);
+
+  server.pipe(process.stdout);
 });
 
 client.on('end', () => {
   console.log('disconnected from server');
 });
+
+
+/////////////KRISSY'S CODE//////////
+// const net =require('net');
+// const client = net.createConnection({ port: 6969}, () => {
+//   //'connect' listener
+//   console.log('connected to server');
+
+//   process.stdin.on('readable', () => {
+//     const chunk = process.stdin.read();
+//     console.log('USERNAME');
+//   if(chunk !== null) {
+//     client.write(chunk.toString());
+//     }
+//   });
+// });
+
+// client.on('end', () => {
+//   console.log('disconnected from server');
+// });
