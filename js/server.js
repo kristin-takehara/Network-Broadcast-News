@@ -30,7 +30,7 @@ const server = net.createServer ((client) => {
       //the firse message should be te client's username
     if( client.username === null && client.username !== admin){
       client.username = data.toString().trim();
-      client.write(`Welcome ${client.username}`);
+      client.write(`.:Welcome, ${client.username}:.  Begin chat!\n`);
     }else{
       //broadcase the message to all other clients
       broadcast(client, `[${client.username}]: ` + data.toString()); //pass in the 'client' sending the message and print
