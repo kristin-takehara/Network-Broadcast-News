@@ -7,7 +7,7 @@ const admin = '[ADMIN]';
 
 const broadcast = (sender, message) =>clients
     .filter ( c => c!== sender) //filter out all who are NOT the sender of the message
-    .forEach ( c => {
+    .forEach ( c => { //iterate over array and broadcast to each client in the array
       c.write(message);
     });
 
@@ -36,6 +36,8 @@ const server = net.createServer ((client) => {
       broadcast(client, `[${client.username}]: ` + data.toString()); //pass in the 'client' sending the message and print
       }
      });
+
+  //iterate through the client.username array to isolate an existing username. If it exists .end connection.
   client.on('end', () => {
   console.log('client disconnected');
   });
@@ -48,3 +50,7 @@ server.listen(PORT, address, () => {
 server.on('error', (err) => {
   throw err;
 });
+
+///*** note: consider using an OBJECT in order to isolate existing users -- verify if object key exists.
+
+  //---> when using an array, use forEach, map, or filter to deep inspect each client connection for theiry username.
